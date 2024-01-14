@@ -11,6 +11,7 @@
                 <th id="th">Patient</th>
                 <th id="th">Date</th>
                 <th id="th">Time</th>
+                <th id="th">Edit</th>
                 <th id="th">Delete</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <td id="td">{{appointment.Patient.Name}}</td>
                 <td id="td">{{appointment.Date}}</td>
                 <td id="td">{{appointment.time}}</td>
+                <td id="td"><a href="{% url 'edit_appointment' appointment.id %}" class="btn btn-primary">Edit</a></td>
                 <td id="td"><a href="{% url 'delete_appointment' appointment.id %}" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}

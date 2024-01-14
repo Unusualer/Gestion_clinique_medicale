@@ -1,0 +1,29 @@
+{% include "base.html"%}
+{% include "navbar.html"%}
+{% load static %}
+{% block content%}
+{% if error == "no" %}
+    <script>
+        alert("Edited in successfully");
+        window.location = "{% url 'edit_doctor' %}";
+    </script>
+{% endif %}
+{% if error == "yes" %}
+    <script>
+        alert("Invalid Edit");
+    </script>
+{% endif %}
+<div class="container" style="margin-top: 50px">
+    <button class="btn btn-primary" onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    <h2>Edit Docteur</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Doctor Name</label>
+        <input type="text" class="form-control" name="name" value="{{doctor.Name}}">
+        <label>Phone</label>
+        <input type="text" class="form-control" name="phone" value="{{doctor.Phone}}">
+        <label>Special</label>
+        <input type="text" class="form-control" name="sp" value="{{doctor.SP}}">&nbsp;
+        <input type="submit" value="Edit" onclick="return confirm('Are you sure ?')" class="form-control btn btn-primary">
+    </form>
+{% endblock content%}

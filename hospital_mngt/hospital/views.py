@@ -39,7 +39,6 @@ def Login(request):
             else:
                 error = "yes"
         except Exception as e:
-            # Handle specific exceptions if needed
             print(f"Exception: {e}")
             error = "yes"
             
@@ -80,6 +79,26 @@ def Add_doctor(request):
     e = {'error': error}
     return render(request, 'add_doctor.html', {**e, 'active_page': active_page})
 
+def Edit_doctor(request, dId):
+    active_page = 'doctor'
+    if not request.user.is_staff:
+        return redirect('login')
+
+    doctor = Doctor.objects.get(id=dId)
+
+    if request.method == "POST":
+        doctor.Name = request.POST.get('name', '')
+        doctor.Phone = request.POST.get('phone', '')
+        doctor.SP = request.POST.get('sp', '')
+        try:
+            doctor.save()
+            return redirect('view_doctor')
+        except:
+            error = "An error occurred while saving the changes."
+
+    # Render the 'edit_doctor.html' template with the doctor details
+    return render(request, 'edit_doctor.html', {'doctor': doctor, 'active_page': active_page})
+
 def Delete_doctor(request, dId):
     if not request.user.is_staff:
         return redirect('login')
@@ -113,6 +132,26 @@ def Add_nurse(request):
     e = {'error': error}
     return render(request, 'add_nurse.html', {**e, 'active_page': active_page})
 
+def Edit_nurse(request, nId):
+    active_page = 'nurse'
+    if not request.user.is_staff:
+        return redirect('login')
+
+    nurse = Nurse.objects.get(id=nId)
+
+    if request.method == "POST":
+        nurse.Name = request.POST.get('name', '')
+        nurse.Phone = request.POST.get('phone', '')
+        nurse.SP = request.POST.get('sp', '')
+        try:
+            nurse.save()
+            return redirect('view_nurse')
+        except:
+            error = "An error occurred while saving the changes."
+
+    # Render the 'edit_nurse.html' template with the nurse details
+    return render(request, 'edit_nurse.html', {'nurse': nurse, 'active_page': active_page})
+
 def Delete_nurse(request, dId):
     if not request.user.is_staff:
         return redirect('login')
@@ -138,13 +177,35 @@ def Add_patient(request):
         g = request.POST.get('gender','')
         p = request.POST.get('phone','')
         a = request.POST.get('address','')
+        m = request.POST.get('address','')
         try:
-            Patient.objects.create(Name=n,Gender=g,Phone=p,Address=a)
+            Patient.objects.create(Name=n,Gender=g,Phone=p,Address=a,Maladie=m)
             error = "no"
         except:
             error = "yes"
     e = {'error' : error}
     return render(request, 'add_patient.html',{**e,'active_page' : active_page})
+
+def Edit_patient(request, pId):
+    active_page = 'patient'
+    if not request.user.is_staff:
+        return redirect('login')
+
+    patient = Patient.objects.get(id=pId)
+
+    if request.method == "POST":
+        patient.Name = request.POST.get('name', '')
+        patient.Gender = request.POST.get('sp', '')
+        patient.Phone = request.POST.get('phone', '')
+        patient.Address = request.POST.get('address', '')
+        patient.Maladie = request.POST.get('maladie', '')
+        try:
+            patient.save()
+            return redirect('view_patient')
+        except:
+            error = "An error occurred while saving the changes."
+
+    return render(request, 'edit_patient.html', {'patient': patient, 'active_page': active_page})
 
 def Delete_patient(request,pId):
     if not request.user.is_staff:
@@ -182,6 +243,29 @@ def Add_appointment(request):
             error = "yes"
     e = {'doctors' : doc ,'patients' : pat , 'error' : error }
     return render(request, 'add_appointment.html',{**e,'active_page' : active_page})
+
+
+def Edit_appointment(request, apId):
+    active_page = 'appointment'
+    if not request.user.is_staff:
+        return redirect('login')
+
+    appointment = Appointment.objects.get(id=apId)
+
+    if request.method == "POST":
+        appointment.Doctor = request.POST.get('doctor', '')
+        appointment.Patient = request.POST.get('patient', '')
+        appointment.Date = request.POST.get('date', '')
+        appointment.time = request.POST.get('time', '')
+
+        try:
+            appointment.save()
+            return redirect('view_appointment')
+        except:
+            error = "An error occurred while saving the changes."
+
+    return render(request, 'edit_appointment.html', {'appointment': appointment, 'active_page': active_page})
+
 
 def Delete_appointment(request,apId):
     if not request.user.is_staff:

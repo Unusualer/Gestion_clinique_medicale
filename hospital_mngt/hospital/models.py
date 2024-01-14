@@ -9,8 +9,8 @@ class Doctor(models.Model):
     password = models.CharField(max_length=50,null=True)
     type_personnel = "doctor"
     
-    #def __str__(self):
-    #    return self.Name
+    def __str__(self):
+        return self.Name
 
 class Nurse(models.Model):
     Name = models.CharField(max_length=50)
@@ -25,6 +25,7 @@ class Patient(models.Model):
     Gender = models.CharField(max_length=10)
     Phone = models.IntegerField(null = True)
     Address = models.TextField()
+    Maladie = models.TextField(null=True)
     email = models.EmailField(max_length=240,null=True)
     password = models.CharField(max_length=50,null=True)
     type_personnel = "patient"

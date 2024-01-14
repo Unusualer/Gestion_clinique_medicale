@@ -4,27 +4,27 @@
 {% block content%}
 {% if error == "no" %}
 <script>
-    alert("Nurse Added")
+    alert("Nurse Updated")
     window.location("view_nurse.html")
 </script>
 {% endif%}
 {% if error == "yes" %}
 <script>
-    alert("Invalid Add")
+    alert("Invalid Edit")
 </script>
 {% endif%}
 <div class="container"  style="margin-top: 50px">
     <button class="btn btn-primary" onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-    <h2>Add Nurse</h2>
+    <h2>Edit Nurse</h2>
     <form method="post">
     {% csrf_token%}
         <label>Nurse Name</label>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name" value="{{nurse.Name}}">
         <label>Phone</label>
-        <input type="text" class="form-control" name="phone">
+        <input type="text" class="form-control" name="phone" value="{{nurse.Phone}}">
         <label>Special</label>
-        <input type="text" class="form-control" name="SP">&nbsp;
-        <input type="submit" value="Add" class="form-control btn btn-primary">
+        <input type="text" class="form-control" name="SP" value="{{nurse.SP}}">&nbsp;
+        <input type="submit" value="Edit" onclick="return confirm('Are you sure ?')" class="form-control btn btn-primary">
     </form>
 </div>
 {% endblock content%}

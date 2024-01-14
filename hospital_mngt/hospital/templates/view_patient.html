@@ -12,6 +12,8 @@
                 <th id="th">Gender</th>
                 <th id="th">Phone</th>
                 <th id="th">Address</th>
+                <th id="th">Maladie</th>
+                <th id="th">Edit</th>
                 <th id="th">Delete</th>
             </tr>
         </thead>
@@ -23,6 +25,8 @@
                 <td id="td">{{patient.Gender}}</td>
                 <td id="td">{{patient.Phone}}</td>
                 <td id="td">{{patient.Address}}</td>
+                <td id="td">{{patient.Maladie}}</td>
+                <td id="td"><a href="{% url 'edit_patient' patient.id %}" class="btn btn-primary">Edit</a></td>
                 <td id="td"><a href="{% url 'delete_patient' patient.id %}" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}

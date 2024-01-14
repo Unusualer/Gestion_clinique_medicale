@@ -11,6 +11,7 @@
                 <th id="th">Name</th>
                 <th id="th">Phone</th>
                 <th id="th">Special</th>
+                <th id="th">Edit</th>
                 <th id="th">Delete</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <td id="td">{{nurse.Name}}</td>
                 <td id="td">{{nurse.Phone}}</td>
                 <td id="td">{{nurse.SP}}</td>
+                <td id="td"><a href="{% url 'edit_nurse' nurse.id %}" class="btn btn-primary">Edit</a></td>
                 <td id="td"><a href="{% url 'delete_nurse' nurse.id %}" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}
