@@ -1,0 +1,28 @@
+{% include "base.html"%}
+{% include "navbar.html"%}
+{% load static %}
+{% block content%}
+{% if error == "no" %}
+    <script>
+        alert("Add in successfully");
+        window.location = "{% url 'view_doctor' %}";
+    </script>
+{% endif %}
+{% if error == "yes" %}
+    <script>
+        alert("Invalid Add");
+    </script>
+{% endif %}
+<div class="container" style="margin-top: 50px">
+    <h2>Add Docteur</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Doctor Name</label>
+        <input type="text" class="form-control" name="name">
+        <label>Phone</label>
+        <input type="text" class="form-control" name="phone">
+        <label>Special</label>
+        <input type="text" class="form-control" name="sp">&nbsp;
+        <input type="submit" value="Add" class="form-control btn btn-primary">
+    </form>
+{% endblock content%}

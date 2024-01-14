@@ -1,0 +1,31 @@
+{% include "base.html"%}
+{% include "navbar.html"%}
+{% load static %}
+{% block content%}
+<div class="container" style="margin-top: 50px; margin-bottom:80px;">
+    <h2>View Nurse</h2>
+    <table id="table">
+        <thead>
+            <tr id="tr">
+                <th id="th">DoctorId</th>
+                <th id="th">Name</th>
+                <th id="th">Phone</th>
+                <th id="th">Special</th>
+                <th id="th">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nurse in nurses %}
+            <tr id="tr">
+                <td id="td">{{nurse.id}}</td>
+                <td id="td">{{nurse.Name}}</td>
+                <td id="td">{{nurse.Phone}}</td>
+                <td id="td">{{nurse.SP}}</td>
+                <td id="td"><a href="{% url 'delete_nurse' nurse.id %}" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content%}
+{% include 'footer.html'%}

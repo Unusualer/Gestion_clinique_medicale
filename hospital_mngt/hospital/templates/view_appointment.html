@@ -1,0 +1,31 @@
+{% include "base.html"%}
+{% include "navbar.html"%}
+{% load static%}
+{% block content%}
+<div class="container" style="margin-top: 50px; margin-bottom:80px;">
+    <h2>View Appointment</h2>
+    <table id="table">
+        <thead>
+            <tr id="tr">
+                <th id="th">Doctor</th>
+                <th id="th">Patient</th>
+                <th id="th">Date</th>
+                <th id="th">Time</th>
+                <th id="th">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr id="tr">
+                <td id="td">{{appointment.Doctor.Name}}</td>
+                <td id="td">{{appointment.Patient.Name}}</td>
+                <td id="td">{{appointment.Date}}</td>
+                <td id="td">{{appointment.time}}</td>
+                <td id="td"><a href="{% url 'delete_appointment' appointment.id %}" onclick="return confirm('Are you sure ?')" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content%}
+{% include "footer.html"%}

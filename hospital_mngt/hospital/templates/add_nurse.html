@@ -1,0 +1,31 @@
+{% include "base.html"%}
+{% include "navbar.html"%}
+{% load static %}
+{% block content%}
+{% if error == "no" %}
+<script>
+    alert("Nurse Added")
+    window.location("view_nurse.html")
+</script>
+{% endif%}
+{% if error == "yes" %}
+<script>
+    alert("Invalid Add")
+</script>
+{% endif%}
+<div class="container"  style="margin-top: 50px">
+    <h2>Add Nurse</h2>
+    <form method="post">
+    {% csrf_token%}
+        <label>Nurse Name</label>
+        <input type="text" class="form-control" name="name">
+        <label>Gender</label>
+        <input type="text" class="form-control" name="gender">
+        <label>Phone</label>
+        <input type="text" class="form-control" name="phone">
+        <label>Address</label>
+        <input type="text" class="form-control" name="address">&nbsp;
+        <input type="submit" value="Add" class="form-control btn btn-primary">
+    </form>
+</div>
+{% endblock content%}
