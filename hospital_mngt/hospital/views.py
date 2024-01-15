@@ -146,7 +146,7 @@ def Add_nurse(request):
         p = request.POST.get('phone', '')
         sp = request.POST.get('sp', '')
         try:
-            Doctor.objects.create(Name=n, Phone=p, SP=sp)
+            Nurse.objects.create(Name=n, Phone=p, SP=sp)
             error = "no"
         except:
             error = "yes"
@@ -174,10 +174,10 @@ def Edit_nurse(request, nId):
     # Render the 'edit_nurse.html' template with the nurse details
     return render(request, 'edit_nurse.html', {'nurse': nurse, 'active_page': active_page})
 
-def Delete_nurse(request, dId):
+def Delete_nurse(request, nId):
     if not request.user.is_staff:
         return redirect('login')
-    nurses = Nurse.objects.get(id = dId)
+    nurses = Nurse.objects.get(id = nId)
     nurses.delete()
     return redirect('view_nurse')
 

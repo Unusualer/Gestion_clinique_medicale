@@ -5,7 +5,7 @@
 {% if error == "no" %}
 <script>
     alert("Nurse Added")
-    window.location("view_nurse.html")
+    window.location = "{% url 'view_nurse' %}";
 </script>
 {% endif%}
 {% if error == "yes" %}
