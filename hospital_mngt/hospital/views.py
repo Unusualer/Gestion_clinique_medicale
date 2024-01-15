@@ -20,7 +20,29 @@ def Index(request):
     active_page = 'index'
     if not request.user.is_staff:
         return redirect('login')
-    return render(request, 'index.html', {'active_page': active_page})
+    
+    doctors = Doctor.objects.all()
+    patients = Patient.objects.all()
+    nurses = Nurse.objects.all()
+    appointments = Appointment.objects.all()
+    
+    d=0
+    p=0
+    n=0
+    a=0
+    
+    for i in doctors:
+        d+=1
+    for i in patients:
+        p+=1
+    for i in nurses:
+        n+=1
+    for i in appointments:
+        a+=1
+    
+    indx = {'d':d,'p':p,'n':n,'a':a}
+    
+    return render(request, 'index.html', {**indx , 'active_page': active_page})
 
 
 def Login(request):

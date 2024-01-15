@@ -1,7 +1,41 @@
 {% include 'base.html'%}
 {% include 'navbar.html'%}
-
+{% load static %}
+<style>
+    .box:hover{
+      box-shadow: 0 0 20px 0 rgba(0,0,0,0.3);
+      transform: translateY(-20px);
+    }
+    hr.bar{
+        border-top: 10px solid lightblue;
+        border-radius: 5px;
+    }
+</style>
 {% block content%}
 <h1 class="text-center" style="margin-top: 50px;">Admin Dashboard</h1>
+<div class="container">
+    <div class="row text-center" style="margin-top: 50px;">
+        <div class="col-sm-3 box box">
+            <h2 style="color: red;">{{d}}</h2>
+            <a href="{% url 'view_doctor'%}"><h4>Doctors</h4></a>
+            <hr class="bar">
+        </div>
+        <div class="col-sm-3 box">
+            <h2 style="color: red;">{{d}}</h2>
+            <a href="{% url 'view_nurse'%}"><h4>Nurses</h4></a>
+            <hr class="bar">
+        </div>
+        <div class="col-sm-3 box">
+            <h2 style="color: red;">{{d}}</h2>
+            <a href="{% url 'view_patient'%}"><h4>Patients</h4></a>
+            <hr class="bar">
+        </div>
+        <div class="col-sm-3 box">
+            <h2 style="color: red;">{{d}}</h2>
+            <a href="{% url 'view_appointment'%}"><h4>Appointments</h4></a>
+            <hr class="bar">
+        </div>
+    </div>
+</div>
 {% endblock content%}
 {% include 'footer.html'%}
